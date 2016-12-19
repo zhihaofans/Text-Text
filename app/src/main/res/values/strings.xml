@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Text Text</string>
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+    <string name="encode">编码</string>
+    <string name="decode">解码</string>
+    <string name="pleaseinputtext">请输入文本</string>
+    <string name="copy">复制</string>
+    <string name="delall">清空</string>
+    <string name="paste">粘贴</string>
+    <string name="aboutapp">这是我的第一个Android app,\n可以将文本转换到不同编码(大概\n代码很乱,bug很多,\n只是学习Android用的,\n以后应该不会更新了。\n\n我的酷安账号:\nzhihaofans\n\nGithub:\nzhihaofans</string>
+</resources>
