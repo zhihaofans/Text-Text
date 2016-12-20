@@ -78,20 +78,24 @@ public class MainActivity extends AppCompatActivity {
                 String oldstr= (String) editText1.getText().toString();
                 String newstr =oldstr;
                 switch (str){
-                    case "gbk2Utf-8":
+                    case "Urlencode":
                         try {
                             newstr=URLEncoder.encode(oldstr,"UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                         break;
-                    case "gbk2ASCII":
-                        newstr= StringToSth.StringToAscii(oldstr);
+                    case "ASCII":
+                        try {
+                            newstr= StringToSth.StringToAscii(oldstr);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
                         break;
-                    case "gbk2Unicode":
+                    case "Unicode":
                         newstr= StringToSth.StringToUnicode(oldstr);
                         break;
-                    case "gbk2Base64":
+                    case "Base64":
                         newstr=Base64.encodeToString(oldstr.getBytes(), Base64.DEFAULT);
                         break;
                     default:
@@ -110,20 +114,24 @@ public class MainActivity extends AppCompatActivity {
                 String oldstr= (String) editText1.getText().toString();
                 String newstr =oldstr;
                 switch (str){
-                    case "gbk2Utf-8":
+                    case "Urlencode":
                         try {
                             newstr= URLDecoder.decode(oldstr,"UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                         break;
-                    case "gbk2ASCII":
-                        newstr= StringToSth.AsciiToString(oldstr);
+                    case "ASCII":
+                        try {
+                            newstr= StringToSth.AsciiToString(oldstr);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
                         break;
-                    case "gbk2Unicode":
+                    case "Unicode":
                         newstr= StringToSth.UnicodeToString(oldstr);
                         break;
-                    case "gbk2Base64":
+                    case "Base64":
                         newstr = new String(Base64.decode(oldstr.getBytes(), Base64.DEFAULT));
                         break;
                     default:
@@ -151,8 +159,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 EditText editText1=(EditText) findViewById(R.id.editText);
-                editText1.setText(SysAct.Tpaste(MainActivity.this));
-                midToast("粘贴成功",1);
+                String pastetext=SysAct.Tpaste(MainActivity.this);
+                if(pastetext==""){
+                    midToast("剪切板空白",1);
+                }else{
+                    editText1.setText(pastetext);
+                    midToast("粘贴成功",1);
+                }
+
+
             }
         });
         button_delall.setOnClickListener(new View.OnClickListener() {

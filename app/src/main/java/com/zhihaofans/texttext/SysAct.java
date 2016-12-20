@@ -16,7 +16,12 @@ public class SysAct {
     }
     public static String Tpaste(Context context)
     {
-        ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-        return cmb.getText().toString().trim();
+        try {
+            ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            return cmb.getText().toString().trim();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
