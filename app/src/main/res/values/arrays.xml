@@ -5,6 +5,12 @@
         <item>Base64</item>
         <item>ASCII</item>
         <item>Unicode</item>
-        <item>Utf-8</item>
+        <item>MD5</item>
+        <item>SHA1</item>
+        <item>SHA224</item>
+        <item>SHA256</item>
+        <item>SHA384</item>
+        <item>SHA512</item>
+
     </string-array>
 </resources>

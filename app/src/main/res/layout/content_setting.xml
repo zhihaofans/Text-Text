@@ -34,7 +34,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:text="2016 zhihaofans"
+        android:text="@string/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -42,17 +42,7 @@
         android:id="@+id/textView4" />
 
     <Button
-        android:text="项目地址"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_github_p"
-        android:layout_marginBottom="13dp"
-        android:layout_above="@+id/textView4"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
-
-    <Button
-        android:text="Github"
+        android:text="@string/github"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_github"
@@ -71,5 +61,32 @@
         android:textSize="45sp"
         android:layout_below="@+id/textView_temp"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/ProjectLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_github_p"
+        android:layout_marginBottom="13dp"
+        android:layout_above="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/UpdateLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignBaseline="@+id/button_github_p"
+        android:layout_alignBottom="@+id/button_github_p"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <TextView
+        android:text="@string/app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView3" />
 
 </RelativeLayout>

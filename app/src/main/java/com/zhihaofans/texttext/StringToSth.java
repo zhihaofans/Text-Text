@@ -1,5 +1,7 @@
 package com.zhihaofans.texttext;
 
+import java.security.MessageDigest;
+
 /**
  * Created by zhihaofans on 2016/12/20.
  */
@@ -61,5 +63,29 @@ public class StringToSth {
             unicode.append("\\u" + Integer.toHexString(c));
         }
         return unicode.toString();
+    }
+    public static String MessageDigestEncode(String type,String txt) {
+        try{
+            MessageDigest md = MessageDigest.getInstance(type);
+            md.update(txt.getBytes());    //问题主要出在这里，Java的字符串是unicode编码，不受源码文件的编码影响；而PHP的编码是和源码文件的编码一致，受源码编码影响。
+            StringBuffer buf=new StringBuffer();
+            for(byte b:md.digest()){
+                buf.append(String.format("%02x", b&0xff));
+            }
+            return  buf.toString();
+        }catch( Exception e ){
+            e.printStackTrace();
+
+            return null;
+        }
+    }
+    public static String md5(String txt) {
+        return MessageDigestEncode("MD5",txt);
+    }
+    public static String sha1(String txt) {
+        return MessageDigestEncode("SHA1",txt);
+    }
+    public static String sha224(String txt) {
+        return MessageDigestEncode("SHA224",txt);
     }
 }

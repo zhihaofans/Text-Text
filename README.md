@@ -1,18 +1,19 @@
 # Text-Text
-我的第一个安卓应用
+我的第一个安卓应用(Android 4.0+)
 
 ## 功能：
-可以将文本转换为Unicode、utf-8、ASCII、BASE64
+可以将文本转换为Unicode、ASCII、BASE64、md5、SHA*
 ## 下载:
 [下载链接](https://github.com/zhihaofans/Text-Text/releases/latest)
 ## 截图：
 ![](https://github.com/zhihaofans/Text-Text/raw/master/image/Screenshot.png)
 ## 开发环境:
-- Windows 10x64
+- Windows 10 (x64)
 - Android studio 2.2.3
 - Java 1.8
 - Android API 25
 
 
 ## 测试环境:
-- Android 6.0/7.1
+- Android 6.0
+- Android 7.1

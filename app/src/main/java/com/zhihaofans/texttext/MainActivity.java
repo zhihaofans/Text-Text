@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Button button_copy=(Button)findViewById(R.id.button_copy);
         Button button_paste=(Button)findViewById(R.id.button_paste);
         Button button_delall=(Button)findViewById(R.id.button_delall);
+        Button button_poi=(Button)findViewById(R.id.button_poi);
         sp = (Spinner) findViewById(R.id.spinner_type);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -68,40 +69,72 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+        button_poi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                midToast("Poi~",1);
+            }
+        });
         button_encode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 TextView temptext=(TextView) findViewById(R.id.textView_temp);
-                EditText editText1=(EditText) findViewById(R.id.editText);
+                EditText editTextinput=(EditText) findViewById(R.id.editText_input);
+                EditText editTextoutput=(EditText) findViewById(R.id.editText_output);
                 String str= (String) temptext.getText();
-                String oldstr= (String) editText1.getText().toString();
-                String newstr =oldstr;
-                switch (str){
-                    case "Urlencode":
-                        try {
-                            newstr=URLEncoder.encode(oldstr,"UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "ASCII":
-                        try {
-                            newstr= StringToSth.StringToAscii(oldstr);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "Unicode":
-                        newstr= StringToSth.StringToUnicode(oldstr);
-                        break;
-                    case "Base64":
-                        newstr=Base64.encodeToString(oldstr.getBytes(), Base64.DEFAULT);
-                        break;
-                    default:
-                        midToast("该功能制作中",1);
+                String oldstr= (String) editTextinput.getText().toString();
+                String newstr ="";
+                if(oldstr.length()>0){
+                    switch (str){
+                        case "Urlencode":
+                            try {
+                                newstr=URLEncoder.encode(oldstr,"UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                midToast("error:Urlencode",1);
+                                e.printStackTrace();
+                            }
+                            break;
+                        case "MD5":
+                            newstr=StringToSth.MessageDigestEncode("MD5",oldstr);
+                            break;
+                        case "SHA1":
+                            newstr=StringToSth.MessageDigestEncode("SHA1",oldstr);
+                            break;
+                        case "SHA224":
+                            newstr=StringToSth.MessageDigestEncode("SHA224",oldstr);
+                            break;
+                        case "SHA256":
+                            newstr=StringToSth.MessageDigestEncode("SHA256",oldstr);
+                            break;
+                        case "SHA384":
+                            newstr=StringToSth.MessageDigestEncode("SHA384",oldstr);
+                            break;
+                        case "SHA512":
+                            newstr=StringToSth.MessageDigestEncode("SHA512",oldstr);
+                            break;
+                        case "ASCII":
+                            try {
+                                newstr= StringToSth.StringToAscii(oldstr);
+                            } catch (NumberFormatException e) {
+                                midToast("error:ASCII",1);
+                                e.printStackTrace();
+                            }
+                            break;
+                        case "Unicode":
+                            newstr= StringToSth.StringToUnicode(oldstr);
+                            break;
+                        case "Base64":
+                            newstr=Base64.encodeToString(oldstr.getBytes(), Base64.DEFAULT);
+                            break;
+                        default:
+                            midToast("该功能制作中或不支持",1);
+                    }
+                    if(newstr.length()>0){
+                        editTextoutput.setText(newstr);
+                    }
                 }
-                editText1.setText(newstr);
+
             }
         });
         button_decode.setOnClickListener(new View.OnClickListener() {
@@ -109,35 +142,41 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 TextView temptext=(TextView) findViewById(R.id.textView_temp);
-                EditText editText1=(EditText) findViewById(R.id.editText);
+                EditText editText1=(EditText) findViewById(R.id.editText_input);
+                EditText editText2=(EditText) findViewById(R.id.editText_output);
                 String str= (String) temptext.getText();
                 String oldstr= (String) editText1.getText().toString();
-                String newstr =oldstr;
-                switch (str){
-                    case "Urlencode":
-                        try {
-                            newstr= URLDecoder.decode(oldstr,"UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "ASCII":
-                        try {
-                            newstr= StringToSth.AsciiToString(oldstr);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "Unicode":
-                        newstr= StringToSth.UnicodeToString(oldstr);
-                        break;
-                    case "Base64":
-                        newstr = new String(Base64.decode(oldstr.getBytes(), Base64.DEFAULT));
-                        break;
-                    default:
-                        midToast("该功能制作中",1);
+                String oldstr2= (String) editText2.getText().toString();
+                String newstr ="";
+                if(oldstr.length()>0) {
+                    switch (str) {
+                        case "Urlencode":
+                            try {
+                                newstr = URLDecoder.decode(oldstr, "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case "ASCII":
+                            try {
+                                newstr = StringToSth.AsciiToString(oldstr);
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case "Unicode":
+                            newstr = StringToSth.UnicodeToString(oldstr);
+                            break;
+                        case "Base64":
+                            newstr = new String(Base64.decode(oldstr.getBytes(), Base64.DEFAULT));
+                            break;
+                        default:
+                            midToast("该功能制作中或不支持", 1);
+                    }
+                    if(newstr.length()>0){
+                        editText2.setText(newstr);
+                    }
                 }
-                editText1.setText(newstr);
 
             }
         });
@@ -145,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                EditText editText1=(EditText) findViewById(R.id.editText);
-                String oldstr= (String) editText1.getText().toString();
-                if(oldstr!=""){
+                EditText editText1=(EditText) findViewById(R.id.editText_output);
+                String oldstr= editText1.getText().toString();
+                if(oldstr.length()>0){
                     SysAct.Tcopy(oldstr,MainActivity.this);
                     midToast("复制成功",1);
                 }
@@ -158,11 +197,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                EditText editText1=(EditText) findViewById(R.id.editText);
+                EditText editText1=(EditText) findViewById(R.id.editText_input);
                 String pastetext=SysAct.Tpaste(MainActivity.this);
-                if(pastetext==""){
-                    midToast("剪切板空白",1);
-                }else{
+                if(pastetext.length()>0){
                     editText1.setText(pastetext);
                     midToast("粘贴成功",1);
                 }
@@ -174,10 +211,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                EditText editText1=(EditText) findViewById(R.id.editText);
+                EditText editText1=(EditText) findViewById(R.id.editText_input);
+                EditText editText2=(EditText) findViewById(R.id.editText_output);
                 String oldstr= (String) editText1.getText().toString();
-                if(oldstr!=""){
+                String newstr= (String) editText2.getText().toString();
+                if(oldstr.length()>0 || newstr.length()>0){
                     editText1.setText("");
+                    editText2.setText("");
                     midToast("清空成功",1);
                 }
             }
